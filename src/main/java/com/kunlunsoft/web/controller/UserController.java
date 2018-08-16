@@ -1,7 +1,6 @@
 package com.kunlunsoft.web.controller;
 
 import com.io.hw.json.HWJacksonUtils;
-import com.kunlunsoft.config.Blog;
 import com.kunlunsoft.entity.User;
 import com.kunlunsoft.mapper.user.UserMapper;
 import com.kunlunsoft.service.UserService;
@@ -32,8 +31,6 @@ public class UserController {
         if (ValueWidget.isNullOrEmpty(users)) {
             userMapper.insertByNameAndAge("AAA", new Random().nextInt(10));
         }
-        Blog blog = new Blog();
-        blog.setDesc222("aaa");
         return  HWJacksonUtils.getJsonP(users);
     }
 }

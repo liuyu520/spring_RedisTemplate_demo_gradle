@@ -21,7 +21,7 @@ spring:
         maxWait: 60000
         minEvictableIdleTimeMillis: 300000
         minIdle: 5
-        password: Y8CVZTCbjqRYG#
+        password: 111
         poolPreparedStatements: true
         testOnBorrow: false
         testOnReturn: false
@@ -46,7 +46,7 @@ spring:
         sentinel:
             master: mymaster
             nodes: 119.23.220.89:7379
-            password: re1230314acc
+            password: 2222
         timeout: 0
     http:
         encoding:
