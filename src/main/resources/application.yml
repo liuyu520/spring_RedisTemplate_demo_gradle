@@ -1,0 +1,57 @@
+debug: false
+
+# HTTP encoding
+
+# 打印SQL语句
+logging:
+    level:
+        com.kunlunsoft.mapper: debug
+    config: classpath:logging/logback-dev.xml
+mybatis:
+    mapper-locations: classpath:mapperxml/*.xml
+spring:
+#    profiles: inte
+    datasource:
+        connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000
+        driver-class-name: com.mysql.jdbc.Driver
+        filters: stat,wall,log4j
+        initialSize: 5
+        maxActive: 20
+        maxPoolPreparedStatementPerConnectionSize: 20
+        maxWait: 60000
+        minEvictableIdleTimeMillis: 300000
+        minIdle: 5
+        password: Y8CVZTCbjqRYG#
+        poolPreparedStatements: true
+        testOnBorrow: false
+        testOnReturn: false
+        testWhileIdle: true
+        timeBetweenEvictionRunsMillis: 60000
+        type: com.alibaba.druid.pool.DruidDataSource
+        url: jdbc:mysql://123.57.78.161:3306/house?characterEncoding=UTF-8
+        username: hw3
+        validationQuery: SELECT 1 FROM DUAL
+    devtools:
+        livereload:
+            enabled: true
+        restart:
+            additional-exclude: static/**,public/**
+    redis:
+        database: 0
+        pool:
+            max-active: 8
+            max-idle: 8
+            max-wait: -1
+            min-idle: 0
+        sentinel:
+            master: mymaster
+            nodes: 119.23.220.89:7379
+            password: re1230314acc
+        timeout: 0
+    http:
+        encoding:
+            charset: UTF-8
+    jackson:
+        date-format: yyyy-MM-dd HH:mm:ss
+blog:
+  url:

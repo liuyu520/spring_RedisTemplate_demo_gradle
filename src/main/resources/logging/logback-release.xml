@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+
+    <!-- 控制台输出日志 -->
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>[%d{"yyyy-MM-dd HH:mm:ss,SSS"}] %-5level [%thread] (%class:%line\) - %m%n</pattern>
+        </encoder>
+    </appender>
+
+    <!-- 文件输出日志 -->
+    <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>/var/log/C1609/mybatis_demo.log</file>
+
+        <encoder>
+            <pattern>[%d{"yyyy-MM-dd HH:mm:ss,SSS"}] %-5level [%thread] (%class:%line\) - %m%n</pattern>
+        </encoder>
+
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>/var/log/C1609/mybatis_demo.log.%d{yyyy-MM-dd}</fileNamePattern>
+        </rollingPolicy>
+    </appender>
+
+    <!-- 异步输出 -->
+    <appender name="ASYNC" class="ch.qos.logback.classic.AsyncAppender">
+        <discardingThreshold>0</discardingThreshold>
+        <queueSize>512</queueSize>
+        <includeCallerData>true</includeCallerData>
+        <appender-ref ref="FILE"/>
+    </appender>
+
+    <!-- 文件输出日志 -->
+    <appender name="SQL" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>/var/log/C1609/mybatis_demo-sql.log</file>
+
+        <encoder>
+            <pattern>[%d{"yyyy-MM-dd HH:mm:ss,SSS"}] %-5level [%thread] (%class:%line\) - %m%n</pattern>
+        </encoder>
+
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>/var/log/C1609/mybatis_demo-sql.log.%d{yyyy-MM-dd}</fileNamePattern>
+        </rollingPolicy>
+    </appender>
+
+    <!-- 文件输出日志 -->
+    <appender name="EX" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>/var/log/C1609/mybatis_demo-ex.log</file>
+
+        <encoder>
+            <pattern>[%d{"yyyy-MM-dd HH:mm:ss,SSS"}] %-5level [%thread] (%class:%line\) - %m%n</pattern>
+        </encoder>
+
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>/var/log/C1609/mybatis_demo-ex.log.%d{yyyy-MM-dd}</fileNamePattern>
+        </rollingPolicy>
+    </appender>
+
+    <logger name="com.alibaba.druid.filter.stat.StatFilter" level="ERROR">
+        <appender-ref ref="SQL"/>
+    </logger>
+
+    <logger name="log.unknown.exception" level="ERROR">
+        <appender-ref ref="EX"/>
+    </logger>
+
+    <!--root-->
+    <root level="INFO">
+        <appender-ref ref="STDOUT"/>
+        <appender-ref ref="ASYNC"/>
+    </root>
+
+</configuration>

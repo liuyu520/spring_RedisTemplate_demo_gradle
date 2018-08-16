@@ -1,0 +1,91 @@
+plugins {
+    id 'java'
+    id 'base'
+//    id 'application'
+//    id "com.github.onslip.gradle-one-jar" version "1.0.5"
+    id 'org.springframework.boot' version '1.5.14.RELEASE'
+}
+
+/*fatJar {
+    classifier 'fat'
+    manifest {
+        attributes 'Main-Class': 'com.kunlunsoft.Application'
+    }
+    exclude 'META-INF/*.DSA', 'META-INF/*.RSA', 'META-INF/*.SF'
+}*/
+//mainClassName = "com.kunlunsoft.Application"
+group 'com.kunlunsoft'
+version '1.0.0-SNAPSHOT'
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+jar {
+    manifest {
+        attributes (['Main-Class': 'com.kunlunsoft.Application'])
+    }
+}
+ext.myName="黄威"
+task walk(description:'walk') {
+    doLast {
+        println 'walk...'
+        println myName
+        project.delete {
+            delete 'README.md'
+            followSymlinks = true
+        }
+        
+    }
+}
+compileJava.dependsOn(processResources)
+/*ext.sharedManifest = manifest {
+    attributes("Main-Class": "com.kunlunsoft.Application")
+}
+task exeJar(type: Jar) {
+    manifest = project.manifest {
+        from sharedManifest
+    }
+}*/
+//include ":io0007"
+//project(":library").projectDir=new File("../../../some-dir/some-project/library")
+repositories {
+    maven { url 'http://maven.aliyun.com/nexus/content/groups/public/' }
+}
+
+dependencies {
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+    testCompile("org.springframework.boot:spring-boot-starter-test")
+    //数据源
+    compile 'org.springframework.boot:spring-boot-starter:1.5.14.RELEASE'
+    compile 'org.springframework.boot:spring-boot-starter-web:1.5.14.RELEASE'
+//    compile 'org.springframework.boot:spring-boot-starter-redis:1.5.14.RELEASE'
+    compile 'org.springframework.boot:spring-boot-starter-data-redis:1.5.14.RELEASE'
+    compile 'mysql:mysql-connector-java:5.1.38'
+    compile 'com.alibaba:druid-spring-boot-starter:1.1.9'
+    compile 'com.alibaba:druid:1.1.9'
+//    compile 'com.kunlunsoft:io0007:0.0.1-SNAPSHOT'
+    compile project.fileTree(dir:'/Users/whuanghkl/code/mygit/io0007/target',include:['io0007-0.0.1-SNAPSHOT.jar'])
+    compile 'com.google.guava:guava:23.0-rc1'
+    compile 'org.apache.commons:commons-email:1.5'
+    compile 'org.codehaus.jackson:jackson-mapper-lgpl:1.9.12'
+    //redis
+//    compile 'org.springframework.data:spring-data-redis:1.8.13.RELEASE'
+    compile 'redis.clients:jedis:2.9.0'
+    compile 'org.springframework.statemachine:spring-statemachine-core:1.2.0.RELEASE'
+    compile 'com.alibaba:fastjson:1.2.47'
+
+//配置mybatis
+    compile "org.mybatis.spring.boot:mybatis-spring-boot-starter:1.1.1"
+
+    compile 'org.springframework.boot:spring-boot-gradle-plugin:1.5.14.RELEASE'
+//    compile 'org.springframework:springloaded:1.5.14.RELEASE'
+    compileOnly 'org.springframework.boot:spring-boot-configuration-processor'
+    compile 'org.projectlombok:lombok:1.16.18'
+    compile 'com.github.dozermapper:dozer-core:6.2.0'
+    compile 'org.projectlombok:lombok:1.16.18'
+//    compile("org.springframework.boot:spring-boot-starter-cache")
+}
